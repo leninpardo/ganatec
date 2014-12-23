@@ -1,6 +1,6 @@
 <?php
 
-class ServiciosController extends BaseController {
+class ActividadesController extends BaseController {
 
     /**
      * Display a listing of the resource.

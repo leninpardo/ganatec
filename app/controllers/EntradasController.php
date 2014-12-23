@@ -1,15 +1,24 @@
 <?php
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of EntradaController
+ *
+ * @author Investigación13
+ */
+
 class EntradasController extends \BaseController
 {
-
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-
-
     public function __construct()
     {        
         $this->beforeFilter(function(){
@@ -23,13 +32,11 @@ class EntradasController extends \BaseController
     {
         return View::make('entradas.index');
     }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return Response
      */
-
     public function getEntradas() 
     {
         $nacimientos = entradas::select('idingreso','codigo_ganado','nombre_ganado','fecha_ingreso','color','precio_compra')
@@ -38,7 +45,6 @@ class EntradasController extends \BaseController
                     ->get();
         return $nacimientos;
     }
-
     public function getProveedor() 
     {
         $nacimientos = proveedores::select('idproveedor','descripcion')
@@ -55,8 +61,6 @@ class EntradasController extends \BaseController
                     ->get();
         return $nacimientos;
     } 
-
-
     public function getEditar()
     {
         $id = Input::get('id');
@@ -65,7 +69,6 @@ class EntradasController extends \BaseController
                     ->get();
         return $nacimiento;
     }
-
     public function upload()
     {
         set_time_limit(0);
@@ -87,15 +90,10 @@ class EntradasController extends \BaseController
             }
         }
     }
-
     public function action() {
-
         $nacimiento = new Nacimiento;
-
         $operacion = Input::get('oper');
-
         switch ($operacion) {
-
             case 'add':
                 $nacimiento->idservicio = Input::get('servicio');
                 $nacimiento->nombre = Input::get('nombre');
@@ -117,7 +115,6 @@ class EntradasController extends \BaseController
                 $nacimiento = Nacimiento::select('id','nombre','pedigree','fecha_nac')->orderBy('id','desc')->take(1)->get();
                 return $nacimiento;
                 break;
-
             case 'edit':
                 $id = Input::get('id');
                 $nacimiento = Nacimiento::find($id);
@@ -140,7 +137,6 @@ class EntradasController extends \BaseController
                 $nacimiento = Nacimiento::select('id','nombre','pedigree','fecha_nac')->where('id',$id)->get();
                 return $nacimiento;
                 break;
-
             case 'del':
                 $id = Input::get('id');
                 $nacimiento = Nacimiento::find($id);
@@ -149,7 +145,6 @@ class EntradasController extends \BaseController
                 break;
         }
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -159,7 +154,6 @@ class EntradasController extends \BaseController
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
@@ -170,7 +164,6 @@ class EntradasController extends \BaseController
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -181,7 +174,6 @@ class EntradasController extends \BaseController
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -192,7 +184,6 @@ class EntradasController extends \BaseController
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -203,5 +194,4 @@ class EntradasController extends \BaseController
     {
         //
     }
-
 }

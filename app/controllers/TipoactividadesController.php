@@ -1,6 +1,6 @@
 <?php
 
-class ParcelasController extends \BaseController {
+class TipoactividadesController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class ParcelasController extends \BaseController {
     }
 
     public function getIndex() {
-        return View::make('parcelas.index');
+        return View::make('tiposervicios.index');
     }
 
     /**
@@ -30,21 +30,21 @@ class ParcelasController extends \BaseController {
         //
     }
 
-    public function getParcelas() {
-        $par = Parcela::select('id','descripcion')
+    public function getTiposervicios() {
+        $tiposervicios = Tiposervicio::select('id','descripcion')
         			->where('estado', '1')
         			->orderBy('id', 'DESC')
         			->get();
-        return $par;
+        return $tiposervicios;
     }
 
     public function getEditar()
     {
         $id = Input::get('id');
-        $parcelas = Parcela::select('id','descripcion')
+        $tiposervicios = Tiposervicio::select('id','descripcion')
                     ->where('id', $id)
                     ->get();
-        return $parcelas;
+        return $tiposervicios;
     }
 
     /**
@@ -54,34 +54,34 @@ class ParcelasController extends \BaseController {
      */
     public function action() {
 
-        $parcela = new Parcela;
+        $tiposervicio = new Tiposervicio;
 
         $operacion = Input::get('oper');
 
         switch ($operacion) {
 
             case 'add':
-                $parcela->descripcion = Input::get('descripcion');
-                $parcela->estado = 1;
-                $parcela->save();
-                $parcela = Parcela::select('id','descripcion')->orderBy('id','desc')->take(1)->get();
-                return $parcela;
+                $tiposervicio->descripcion = Input::get('descripcion');
+                $tiposervicio->estado = 1;
+                $tiposervicio->save();
+                $tiposervicio = Tiposervicio::select('id','descripcion')->orderBy('id','desc')->take(1)->get();
+                return $tiposervicio;
                 break;
 
             case 'edit':
                 $id = Input::get('id');
-                $parcela = Parcela::find($id);
-                $parcela->descripcion = Input::get('descripcion');
-                $parcela->save();
-                $parcela = Parcela::select('id','descripcion')->where('id',$id)->get();
-                return $parcela;
+                $tiposervicio = Tiposervicio::find($id);
+                $tiposervicio->descripcion = Input::get('descripcion');
+                $tiposervicio->save();
+                $tiposervicio = Tiposervicio::select('id','descripcion')->where('id',$id)->get();
+                return $tiposervicio;
                 break;
 
             case 'del':
                 $id = Input::get('id');
-                $parcela = Parcela::find($id);
-                $parcela->estado = 0;
-                $parcela->save();
+                $tiposervicio = Tiposervicio::find($id);
+                $tiposervicio->estado = 0;
+                $tiposervicio->save();
                 break;
         }
     }
