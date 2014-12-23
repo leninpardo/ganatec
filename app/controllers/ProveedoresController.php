@@ -1,6 +1,6 @@
 <?php
 
-class ProveedorController extends \BaseController {
+class ProveedoresController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -32,9 +32,9 @@ class ProveedorController extends \BaseController {
 
     public function getProveedor() {
         $proveedor = DB::table('proveedores as p')
-                    ->select('p.idproveedor','p.razon_social','p.ruc','p.direccion')
+                    ->select('p.id','p.razon_social','p.ruc','p.direccion')
         			->where('p.estado', '1')
-        			->orderBy('p.idproveedor', 'DESC')
+        			->orderBy('p.id', 'DESC')
         			->get();
         return $proveedor;
     }
@@ -42,8 +42,8 @@ class ProveedorController extends \BaseController {
     public function getEditar()
     {
         $id = Input::get('id');
-        $proveedor = proveedores::select('idproveedor','nombre','razon_social','ruc','direccion')
-                    ->where('idproveedor', $id)
+        $proveedor = proveedores::select('id','nombre','razon_social','ruc','direccion')
+                    ->where('id', $id)
                     ->get();
         return $proveedor;
     }
@@ -55,47 +55,47 @@ class ProveedorController extends \BaseController {
      */
     public function action() {
 
-        $enfermedad = new Enfermedad;
+        $obj = new proveedores;
 
         $operacion = Input::get('oper');
 
         switch ($operacion) {
 
             case 'add':
-                $enfermedad->descripcion = Input::get('descripcion');
-                $enfermedad->idanimal = Input::get('animal');
-                $enfermedad->idlote = Input::get('loted');
-                $enfermedad->estado = 1;
-                $enfermedad->save();
-                $animal = Nacimiento::find(Input::get('animal'));
-                $animal->idlote = Input::get('loted');
-                $animal->save();
-                $enfermedad = DB::table('enfermedads as e')
-                    ->join('nacimientos as n','e.idanimal','=','n.id')
-                    ->join('lotes as l','l.id','=','n.idlote')
-                    ->select('e.id','e.descripcion','n.nombre','l.descripcion as lote')
-                    ->orderBy('e.id','desc')->take(1)->get();
-                return $enfermedad;
+                $obj->nombre = Input::get('nombre');
+                $obj->razon_social = Input::get('razon_social');
+                $obj->ruc = Input::get('ruc');
+                $obj->direccion = Input::get('direccion');
+                $obj->estado = 1;
+                $obj->save();
+                $obj_proveedores = DB::table('proveedores as p')
+                        ->select('p.id', 'p.razon_social', 'p.ruc', 'p.direccion')
+                        ->where('p.estado', '1')
+                        ->orderBy('p.id', 'DESC')
+                        ->take(1)
+                        ->get();
+                return $obj_proveedores;
                 break;
 
             case 'edit':
                 $id = Input::get('id');
-                $enfermedad = Enfermedad::find($id);
-                $enfermedad->descripcion = Input::get('descripcion');
-                $enfermedad->idanimal = Input::get('animal');
-                $enfermedad->idlote = Input::get('loted');
-                $enfermedad->save();
-                $enfermedad = DB::table('enfermedads as e')
-                    ->join('nacimientos as n','e.idanimal','=','n.id')
-                    ->join('lotes as l','l.id','=','n.idlote')
-                    ->select('e.id','e.descripcion','n.nombre','l.descripcion as lote')
-                    ->where('e.id',$id)->get();
-                return $enfermedad;
+                $obj = proveedores::find($id);
+                $obj->nombre = Input::get('nombre');
+                $obj->razon_social = Input::get('razon_social');
+                $obj->ruc = Input::get('ruc');
+                $obj->direccion = Input::get('direccion');
+                $obj->save();
+                $obj_proveedores =
+                DB::table('proveedores as p')
+                        ->select('p.id', 'p.razon_social', 'p.ruc', 'p.direccion')
+                        ->where('p.id', $id)               
+                        ->get();
+                return $obj_proveedores;
                 break;
 
             case 'del':
                 $id = Input::get('id');
-                $enfermedad = Enfermedad::find($id);
+                $enfermedad = proveedores::find($id);
                 $enfermedad->estado = 0;
                 $enfermedad->save();
                 break;

@@ -1,7 +1,7 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		Lista de Animales
+		Lista de ganados
 		<a href="#modal-form" role="button" data-toggle="modal" onclick="nuevo()" class="btn btn-default pull-right btn-add">
 			<i class="fa fa-plus"></i>
 			Agregar
@@ -35,12 +35,12 @@
 							</div>
 						</div>
 						<div class="form-group has-info">
-				    		<label for="pedigree" class="col-xs-12 col-sm-4 control-label no-padding-right">
-				    			Pedigree
+				    		<label for="codigo" class="col-xs-12 col-sm-4 control-label no-padding-right">
+				    			Codigo
 				    		</label>
 				    		<div class="col-xs-12 col-sm-7">
 								<span class="block input-icon input-icon-right">
-									<input type="text" id="pedigree" name="pedigree" class="form-control"  />
+									<input type="text" id="codigo_ganado" name="codigo_ganado" class="form-control"  />
 								</span>
 							</div>
 						</div>
@@ -50,42 +50,58 @@
 				    		</label>
 				    		<div class="col-xs-12 col-sm-7">
 								<span class="block input-icon input-icon-right">
-									<input type="text" id="sexo" name="sexo" class="form-control"  />
+                                                                    <select name="sexo" id="sexo">
+                                                                        <option>::Seleccione::</option>
+                                                                        <option>Hembra</option>
+                                                                        <option>Macho</option>
+                                                                    </select>
 								</span>
 							</div>
 						</div>
 						<div class="form-group has-info">
-				    		<label for="fecha_nac" class="col-xs-12 col-sm-4 control-label no-padding-right">
-				    			Fecha Nacimiento
+				    		<label for="fecha_ingreso" class="col-xs-12 col-sm-4 control-label no-padding-right">
+				    			Fecha Ingreso
 				    		</label>
 				    		<div class="col-xs-12 col-sm-7">
 								<span class="block input-icon input-icon-right">
-									<input type="date" id="fecha_nac" name="fecha_nac" class="form-control"  />
+									<input type="date" id="fecha_ingreso" name="fecha_ingreso" class="form-control"  />
 								</span>
 							</div>
 						</div>
-						<div class="form-group has-info">
-				    		<label for="servicio" class="col-xs-12 col-sm-4 control-label no-padding-right">
-				    			Servicio
+                                        <div class="form-group has-info">
+				    		<label for="fecha_nac" class="col-xs-12 col-sm-4 control-label no-padding-right">
+				    			Procedencia
 				    		</label>
 				    		<div class="col-xs-12 col-sm-7">
-								<select id="servicio" name="servicio" class="form-control"></select>
+								<span class="block input-icon input-icon-right">
+									<input type="text" id="procedencia" name="procedencia" class="form-control"  />
+								</span>
+							</div>
+						</div>
+                                        
+						<div class="form-group has-info">
+				    		<label for="proveedor" class="col-xs-12 col-sm-4 control-label no-padding-right">
+				    			Proveedor
+				    		</label>
+				    		<div class="col-xs-12 col-sm-7">
+								<select id="idproveedor" name="idproveedor" class="form-control"></select>
+							</div>
+						</div>
+                                        
+						<div class="form-group has-info">
+				    		<label for="raza" class="col-xs-12 col-sm-4 control-label no-padding-right">
+				    			Raza
+				    		</label>
+				    		<div class="col-xs-12 col-sm-7">
+								<select id="idraza" name="idraza" class="form-control"></select>
 							</div>
 						</div>
 						<div class="form-group has-info">
-				    		<label for="npadre" class="col-xs-12 col-sm-4 control-label no-padding-right">
-				    			Padre
+				    		<label for="color" class="col-xs-12 col-sm-4 control-label no-padding-right">
+				    			Color
 				    		</label>
 				    		<div class="col-xs-12 col-sm-7">
-								<select id="npadre" name="npadre" class="form-control"></select>
-							</div>
-						</div>
-						<div class="form-group has-info">
-				    		<label for="nmadre" class="col-xs-12 col-sm-4 control-label no-padding-right">
-				    			Madre
-				    		</label>
-				    		<div class="col-xs-12 col-sm-7">
-								<select id="nmadre" name="nmadre" class="form-control"></select>
+                                                    <input type="text" name="color" id="color"/>
 							</div>
 						</div>
 						<div class="form-group has-info">
@@ -105,51 +121,52 @@
 							</div>
 						</div>
 						<div class="form-group has-info">
-				    		<label for="categoria" class="col-xs-12 col-sm-4 control-label no-padding-right">
-				    			Etapa
+				    		<label for="edad" class="col-xs-12 col-sm-4 control-label no-padding-right">
+				    			Edad
 				    		</label>
 				    		<div class="col-xs-12 col-sm-7">
-								<select id="categoria" name="categoria" class="form-control"></select>
+                                                    <input type="text" name="edad" id="edad"/>
+							</div>
+						</div>
+                                        <div class="form-group has-info">
+				    		<label for="peso_ingreso" class="col-xs-12 col-sm-4 control-label no-padding-right">
+				    			peso ingreso
+				    		</label>
+				    		<div class="col-xs-12 col-sm-7">
+                                                    <input type="text" name="peso_ingreso" id="peso_ingreso"/>
 							</div>
 						</div>
 						<div class="form-group has-info">
-				    		<label for="especie" class="col-xs-12 col-sm-4 control-label no-padding-right">
-				    			Especie
+				    		<label for="precio_compra" class="col-xs-12 col-sm-4 control-label no-padding-right">
+				    			precio compra
 				    		</label>
 				    		<div class="col-xs-12 col-sm-7">
-								<select id="especie" name="especie" class="form-control"></select>
+                                                    <input type="text" name="precio_compra" id="precio_compra"/>
 							</div>
 						</div>
-						<div class="form-group has-info">
-				    		<label for="lote" class="col-xs-12 col-sm-4 control-label no-padding-right">
-				    			Lote
-				    		</label>
-				    		<div class="col-xs-12 col-sm-7">
-								<select id="lote" name="lote" class="form-control"></select>
-							</div>
-						</div>
-						<div class="form-group has-info">
-				    		<label for="estado" class="col-xs-12 col-sm-4 control-label no-padding-right">
-				    			Estado
-				    		</label>
-				    		<div class="col-xs-12 col-sm-7">
-								<select id="estado" name="estado" class="form-control"></select>
-							</div>
-						</div>
-						<div class="form-group has-info">
-				    		<label for="raza" class="col-xs-12 col-sm-4 control-label no-padding-right">
-				    			Raza
-				    		</label>
-				    		<div class="col-xs-12 col-sm-7">
-								<select id="raza" name="raza" class="form-control"></select>
-							</div>
-						</div>
+                                        <div class="form-group has-info">
+                                            <label for="costo_transporte" class="col-xs-12 col-sm-4 control-label no-padding-right">
+                                                Costo transporte
+                                            </label>
+                                            <div class="col-xs-12 col-sm-7">
+                                                <input type="text" name="costo_transporte" id="costo_transporte"/>
+                                            </div>
+                                        </div>
+                                          <div class="form-group has-info">
+                                            <label for="costo_transporte" class="col-xs-12 col-sm-4 control-label no-padding-right">
+                                                Costo Vaquero
+                                            </label>
+                                            <div class="col-xs-12 col-sm-7">
+                                                <input type="text" name="costo_vaquero" id="costo_vaquero"/>
+                                            </div>
+                                        </div>
+                                        
 				    </form>
 				</div>
 		    </div>
 		    <div class="modal-footer">
 				<div class="btn-footer">
-				    <button class="btn btn-primary" onclick="validar('nacimientos')" id="btn-save">
+				    <button class="btn btn-primary" onclick="validar('entradas')" id="btn-save">
 				    	<i class='icon-ok'></i>
 				    	Guardar
 				    </button>
@@ -174,135 +191,43 @@
     var col_names = ['Item', 'Nombre', 'codigo', 'fecha ingreso','color','precio compra', ''];
     var accion = ['edit','delete'];
     loadTable('GET', url+'/getEntradas', url, grid_table, col_names, accion);
-    
-    var servicio = $("#servicio");
+    $("#fecha_ingreso").datepicker();
+    var proveedor = $("#idproveedor");
     $.ajax({
         type: 'GET',
         url: url+'/getProveedor',
         beforeSend: function() {
-            servicio.html(cargando);
+            proveedor.html(cargando);
         },
         success: function(data) {
             var cadena = '<option value="">Seleccione...</option>';
             for(var i=0; i<data.length; i++)
-                cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
-            servicio.empty().html(cadena);
+                cadena += '<option value="' + data[i].id + '">' + data[i].razon_social + '</option>';
+            proveedor.empty().html(cadena);
         }
     });
- var raza = $("#raza");
+ var raza = $("#idraza");
     $.ajax({
         type: 'GET',
         url: url+'/getRaza',
         beforeSend: function() {
-            servicio.html(cargando);
+            raza.html(cargando);
         },
         success: function(data) {
             var cadena = '<option value="">Seleccione...</option>';
             for(var i=0; i<data.length; i++)
                 cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
-            servicio.empty().html(cadena);
+            raza.empty().html(cadena);
         }
     });
-    var padre = $("#npadre");
-    var madre = $("#nmadre");
-    $.ajax({
-        type: 'GET',
-        url: url+'/getPadreMadre',
-        beforeSend: function() {
-            padre.html(cargando);
-            madre.html(cargando);
-        },
-        success: function(data) {
-            var cadena = '<option value="">Seleccione...</option>';
-            for(var i=0; i<data.length; i++)
-                cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
-            padre.empty().html(cadena);
-            madre.empty().html(cadena);
-        }
-    });
-
-/*    var select1 = $("#categoria");
-    $.ajax({
-        type: 'GET',
-        url: url+'/getCategoria',
-        beforeSend: function() {
-            select1.html(cargando);
-        },
-        success: function(data) {
-            var cadena = '<option value="">Seleccione...</option>';
-            for(var i=0; i<data.length; i++)
-                cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
-            select1.empty().html(cadena);
-        }
-    });
-
-    var select2 = $("#especie");
-    $.ajax({
-        type: 'GET',
-        url: url+'/getEspecie',
-        beforeSend: function() {
-            select2.html(cargando);
-        },
-        success: function(data) {
-            var cadena = '<option value="">Seleccione...</option>';
-            for(var i=0; i<data.length; i++)
-                cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
-            select2.empty().html(cadena);
-        }
-    });
-
-    var select4 = $("#lote");
-    $.ajax({
-        type: 'GET',
-        url: url+'/getLote',
-        beforeSend: function() {
-            select4.html(cargando);
-        },
-        success: function(data) {
-            var cadena = '<option value="">Seleccione...</option>';
-            for(var i=0; i<data.length; i++)
-                cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
-            select4.empty().html(cadena);
-        }
-    });
-
-    var select5 = $("#estado");
-    $.ajax({
-        type: 'GET',
-        url: url+'/getEstado',
-        beforeSend: function() {
-            select5.html(cargando);
-        },
-        success: function(data) {
-            var cadena = '<option value="">Seleccione...</option>';
-            for(var i=0; i<data.length; i++)
-                cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
-            select5.empty().html(cadena);
-        }
-    });
-
-    var select6 = $("#raza");
-    $.ajax({
-        type: 'GET',
-        url: url+'/getRaza',
-        beforeSend: function() {
-            select6.html(cargando);
-        },
-        success: function(data) {
-            var cadena = '<option value="">Seleccione...</option>';
-            for(var i=0; i<data.length; i++)
-                cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
-            select6.empty().html(cadena);
-        }
-    });*/
-
+    
     var validar = function(url)
     {
     	bval = true;   
         bval = bval && $("#nombre").required();
-        bval = bval && $("#pedigree").required();
+        bval = bval && $("#codigo_ganado").required();
         bval = bval && $("#sexo").required();
-        bval = bval && $("#fecha_nac").required();
+        bval = bval && $("#fecha_ingreso").required();
         
         if (bval) 
         {
@@ -314,24 +239,25 @@
     var llenar_datos = function(data)
     {
     	$("#id_main").val(data[0].id);
-    	$("#nombre").val(data[0].nombre);
-    	$("#pedigree").val(data[0].pedigree);
+    	$("#nombre").val(data[0].nombre_ganado);
+    	$("#codigo_ganado").val(data[0].codigo_ganado);
     	$("#sexo").val(data[0].sexo);
-    	$("#fecha_nac").val(data[0].fecha_nac);
-    	$("#servicio").val(data[0].idservicio);
-    	$("#npadre").val(data[0].npadre);
-    	$("#nmadre").val(data[0].nmadre);
+    	$("#fecha_ingreso").val(data[0].fecha_ingreso);
+    	$("#procedencia").val(data[0].procedencia);
+    	$("#idproveedor").val(data[0].idproveedor);
+    	$("#idraza").val(data[0].idraza);
     	$("#caracteristicas").val(data[0].caracteristicas);
     	$("#observaciones").val(data[0].observaciones);
-    	$("#categoria").val(data[0].idcategoria);
-    	$("#especie").val(data[0].idespecie);
-    	$("#lote").val(data[0].idlote);
-    	$("#estado").val(data[0].idestado);
-    	$("#raza").val(data[0].idraza);
+    	$("#color").val(data[0].color);
+    	$("#edad").val(data[0].edad);
+    	$("#peso_ingreso").val(data[0].peso_ingreso);
+        $("#precio_compra").val(data[0].precio_compra);
+    	$("#costo_transporte").val(data[0].costo_transporte);
+    	$("#costo_vaquero").val(data[0].costo_vaquero);
     }
 
 	var limpiar = function()
 	{
-	    $('#id_main, #nombre, #pedigree, #sexo, #fecha_nac, #servicio, #npadre, #nmadre, #caracteristicas, #observaciones, #categoria, #especie, #lote, #estado, #raza').val('');
+	    $('#id_main, #nombre, #codigo_ganado, #sexo, #fecha_ingreso, #idproveedor, #idraza, #color, #caracteristicas, #edad, #peso_ingreso, #precio_compra, #costo_transporte, #costo_vaquero').val('');
 	}
 </script>

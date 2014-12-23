@@ -23,23 +23,13 @@
 		    <div class="modal-body text-justify overflow-visible">
 				<div id="bodymodal">
 				    <form class="form-horizontal" id='formulario'>
-						<div class="form-group has-info">
-				    		<label for="descripcion" class="col-xs-12 col-sm-3 control-label no-padding-right">
-				    			Descripción
-				    		</label>
-				    		<div class="col-xs-12 col-sm-8">
-								<span class="block input-icon input-icon-right">
-									<input type="hidden" id="id_main" name="id" />
-									<input type="text" id="descripcion" name="descripcion" class="form-control"  />
-									<i class="icon-user"></i>
-								</span>
-							</div>
-						</div>
+						
 						<div class="form-group has-info">
 				    		<label for="nombre" class="col-xs-12 col-sm-3 control-label no-padding-right">
 				    			Nombre
 				    		</label>
-				    		<div class="col-xs-12 col-sm-8">                              
+				    		<div class="col-xs-12 col-sm-8">         
+                                                    <input type="hidden" id="id_main" name="id" />
                                                     <input type="text" name="nombre" id="nombre"/>
 							</div>
 						</div>
@@ -73,7 +63,7 @@
 		    </div>
 		    <div class="modal-footer">
 				<div class="btn-footer">
-				    <button class="btn btn-primary" onclick="validar('enfermedades')" id="btn-save">
+				    <button class="btn btn-primary" onclick="validar('proveedor')" id="btn-save">
 				    	<i class='icon-ok'></i>
 				    	Guardar
 				    </button>
@@ -117,10 +107,13 @@
     {
     	$("#id_main").val(data[0].id);
     	$("#razon_social").val(data[0].razon_social);
+        $("#nombre").val(data[0].nombre);
+        $("#ruc").val(data[0].ruc);
+        $("#direccion").val(data[0].direccion);
     }
 
 	var limpiar = function()
 	{
-	    $('#id_main, #descripcion, #lote, #animal, #loted').val('');
+	    $('#id_main, #nombre, #razon_social, #ruc, #direccion').val('');
 	}
 </script>

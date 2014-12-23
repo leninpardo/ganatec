@@ -54,7 +54,7 @@ class PerfilsController extends \BaseController {
      */
     public function action() {
 
-        $perfil = new Perfil;
+        $perfil = new Perfil();
 
         $operacion = Input::get('oper');
 

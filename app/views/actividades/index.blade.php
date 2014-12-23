@@ -59,6 +59,33 @@
                                 </span>
                             </div>
                         </div>
+                          <div class="form-group has-info">
+                            <label for="ganado" class="col-xs-12 col-sm-3 control-label no-padding-right">
+                                En caso de de aplicarse a un ganado seleccionar?
+                            </label>
+                            <div class="col-xs-12 col-sm-8">
+                                <span class="">                                   
+                                    <select name="ganado" id="ganado">
+                                        
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                         <div class="form-group has-info">
+                            <label for="tipo" class="col-xs-12 col-sm-3 control-label no-padding-right">
+                                Tipo
+                            </label>
+                            <div class="col-xs-12 col-sm-8">
+                                <span class="">                                   
+                                    <select name="tipo" id="tipo">
+                                        <option value="1">Ingreso</option>
+                                        <option value="2">Gasto</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        
                         <div class="form-group has-info">
                             <label for="cantidad" class="col-xs-12 col-sm-3 control-label no-padding-right">
                                 Cantidad
@@ -76,6 +103,16 @@
                             <div class="col-xs-12 col-sm-8">
                                 <span class="">                                   
                                     <input type="text" name="precio" id="precio"/>
+                                </span>
+                            </div>
+                        </div>
+                         <div class="form-group has-info">
+                            <label for="total" class="col-xs-12 col-sm-3 control-label no-padding-right">
+                                Total
+                            </label>
+                            <div class="col-xs-12 col-sm-8">
+                                <span class="">                                   
+                                    <input  readonly="" type="text" name="total" id="total"/>
                                 </span>
                             </div>
                         </div>
@@ -102,15 +139,41 @@
     </div>
 </div>
 <script type="text/javascript">
-    
+    $("#precio").keyup(function(){
+       precio=$(this).val();
+       cantidad=$("#cantidad").val();
+       if(cantidad==''){cantidad=0;}
+       total=parseFloat(precio)+parseFloat(cantidad);
+       $("#total").val(total);
+    });
+     $("#cantidad").keyup(function(){
+           precio=$("#precio").val();
+       cantidad=$(this).val();
+       if(precio==''){precio=0;}
+       total=parseFloat(precio)+parseFloat(cantidad);
+       $("#total").val(total); 
+    });
     $('.load-footer').hide();
     var url = 'actividades';
     var grid_table = $(".table-responsive");
     var col_names = ['Item','fecha', 'Descripción', 'Tipo de actividad', 'precio',''];
     var accion = ['edit','delete'];
-
     loadTable('GET', url+'/getactividades', url, grid_table, col_names, accion);
-
+     var ganado = $("#ganado");
+    $.ajax({
+        type: 'GET',
+        url: url+'/getGanado',
+        beforeSend: function() {
+            ganado.html(cargando);
+        },
+        success: function(data) {
+            var cadena = '<option value="">Seleccione...</option>';
+            for(var i=0; i<data.length; i++)
+                cadena += '<option value="' + data[i].id + '">' + data[i].codigo_ganado + '</option>';
+            ganado.empty().html(cadena);
+        }
+    });
+ $("#fecha_actividad").datepicker();
     var subactividad = $("#subactividad");
     $.ajax({
         type: 'GET',
@@ -147,11 +210,12 @@
         $("#fecha_actividad").val(data[0].fecha_actividad);
         $("#cantidad").val(data[0].cantidad);
         $("#precio").val(data[0].precio);
+        $("#ganado").val(data[0].ganado);
         //set_chosen();
     }
 
     var limpiar = function()
     {
-        $('#id_main, #descripcion').val('');
+        $('#id_main, #descripcion, #subactividad, #fecha_actividad, #cantidad,#precio,#ganado').val('');
     }
 </script>

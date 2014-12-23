@@ -56,7 +56,13 @@ class ActividadesController extends BaseController {
                     ->get();
         return $servicios;
     }
-
+public function getGanado()
+    {
+        $ganado = entradas::select('id','codigo_ganado')
+                    ->where('estado','1')
+                    ->get();
+        return $ganado;
+    }
     public function action() {
 
         $servicio = new Actividades();
@@ -71,11 +77,14 @@ class ActividadesController extends BaseController {
                 $servicio->fecha_actividad = Input::get('fecha_actividad');
                 $servicio->cantidad = Input::get('cantidad');
                 $servicio->precio   = Input::get('precio');
+                 $servicio->total   = Input::get('total');
+                  $servicio->tipo   = Input::get('tipo');
+                   $servicio->ganado   = Input::get('ganado');
                 $servicio->estado = 1;
                 $servicio->save();
                 $servicio =DB::table('actividades as a')
                     ->join('subactividades as sa','a.sub_actividad','=','sa.id')
-                    ->select('a.id','a.fecha_actividad','a.descripcion','sa.descripcion as tip','a.precio as costo')
+                    ->select('a.id','a.fecha_actividad','a.descripcion','sa.descripcion as tip','a.precio as costo','a.ganado','a.total')
                     ->where('a.estado','1')
                     ->orderBy('a.id','DESC')->take(1)->get();
                 return $servicio;
@@ -93,7 +102,7 @@ class ActividadesController extends BaseController {
                 $servicio->save();
                 $servicio =DB::table('actividades as a')
                     ->join('subactividades as sa','a.sub_actividad','=','sa.id')
-                    ->select('a.id','a.fecha_actividad','a.descripcion','sa.descripcion as tip','a.precio as costo')
+                    ->select('a.id','a.fecha_actividad','a.descripcion','sa.descripcion as tip','a.precio as costo','a.ganado','a.tipo','a.total')
        
                         ->where('a.id',$id)
                    ->get();

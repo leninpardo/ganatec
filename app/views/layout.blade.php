@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>@yield('title', 'CONTROL ANIMAL')</title>
+        <title>@yield('title', 'Sistema de control de ganado::Ganatec::')</title>
 
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

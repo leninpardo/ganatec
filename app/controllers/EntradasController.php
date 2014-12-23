@@ -39,17 +39,17 @@ class EntradasController extends \BaseController
      */
     public function getEntradas() 
     {
-        $nacimientos = entradas::select('idingreso','codigo_ganado','nombre_ganado','fecha_ingreso','color','precio_compra')
+        $nacimientos = entradas::select('id','codigo_ganado','nombre_ganado','fecha_ingreso','color','precio_compra')
                     ->where('estado', '1')
-                    ->orderBy('idingreso', 'DESC')
+                    ->orderBy('id', 'DESC')
                     ->get();
         return $nacimientos;
     }
     public function getProveedor() 
     {
-        $nacimientos = proveedores::select('idproveedor','descripcion')
+        $nacimientos = proveedores::select('id','razon_social')
                     ->where('estado', '1')
-                    ->orderBy('idproveedor', 'DESC')
+                    ->orderBy('id', 'DESC')
                     ->get();
         return $nacimientos;
     } 
@@ -64,10 +64,10 @@ class EntradasController extends \BaseController
     public function getEditar()
     {
         $id = Input::get('id');
-        $nacimiento = Nacimiento::select()
+        $entradas = entradas::select('*')
                     ->where('id', $id)
                     ->get();
-        return $nacimiento;
+        return $entradas;
     }
     public function upload()
     {
@@ -91,55 +91,57 @@ class EntradasController extends \BaseController
         }
     }
     public function action() {
-        $nacimiento = new Nacimiento;
+    $obj = new entradas();
         $operacion = Input::get('oper');
         switch ($operacion) {
             case 'add':
-                $nacimiento->idservicio = Input::get('servicio');
-                $nacimiento->nombre = Input::get('nombre');
-                $nacimiento->pedigree = Input::get('pedigree');
-                $nacimiento->sexo = Input::get('sexo');
-                $nacimiento->fecha_nac = Input::get('fecha_nac');
-                $nacimiento->npadre = Input::get('npadre');
-                $nacimiento->nmadre = Input::get('nmadre');
-                $nacimiento->caracteristicas = Input::get('caracteristicas');
-                $nacimiento->observaciones = Input::get('observaciones');
-                $nacimiento->idcategoria = Input::get('categoria');
-                $nacimiento->idespecie = Input::get('especie');
-                $nacimiento->idetapa = Input::get('etapa');
-                $nacimiento->idlote = Input::get('lote');
-                $nacimiento->idestado = Input::get('estado');
-                $nacimiento->idraza = Input::get('raza');
-                $nacimiento->estado = 1;
-                $nacimiento->save();
-                $nacimiento = Nacimiento::select('id','nombre','pedigree','fecha_nac')->orderBy('id','desc')->take(1)->get();
-                return $nacimiento;
+                
+                $obj->nombre_ganado = Input::get('nombre');
+                $obj->codigo_ganado = Input::get('codigo_ganado');
+                $obj->sexo = Input::get('sexo');
+                $obj->fecha_ingreso = Input::get('fecha_ingreso');
+                $obj->idproveedor = Input::get('idproveedor');
+                $obj->idraza = Input::get('idraza');
+                $obj->caracteristicas = Input::get('caracteristicas');
+                $obj->observaciones = Input::get('observaciones');
+                $obj->procedencia = Input::get('procedencia');
+                $obj->color  = Input::get('color');
+                $obj->peso_ingreso  = Input::get('peso_ingreso');
+                $obj->edad = Input::get('edad');
+                $obj->precio_compra = Input::get('precio_compra');
+                $obj->costo_transporte = Input::get('costo_transporte');
+                $obj->costo_vaquero = Input::get('costo_vaquero');
+                $obj->estado = 1;
+                $obj->save();
+                $obj_datos = entradas::select('id','codigo_ganado','nombre_ganado','fecha_ingreso','color','precio_compra')->orderBy('id','desc')->take(1)->get();
+                return $obj_datos;
                 break;
             case 'edit':
                 $id = Input::get('id');
-                $nacimiento = Nacimiento::find($id);
-                $nacimiento->idservicio = Input::get('servicio');
-                $nacimiento->nombre = Input::get('nombre');
-                $nacimiento->pedigree = Input::get('pedigree');
-                $nacimiento->sexo = Input::get('sexo');
-                $nacimiento->fecha_nac = Input::get('fecha_nac');
-                $nacimiento->npadre = Input::get('npadre');
-                $nacimiento->nmadre = Input::get('nmadre');
-                $nacimiento->caracteristicas = Input::get('caracteristicas');
-                $nacimiento->observaciones = Input::get('observaciones');
-                $nacimiento->idcategoria = Input::get('categoria');
-                $nacimiento->idespecie = Input::get('especie');
-                $nacimiento->idetapa = Input::get('etapa');
-                $nacimiento->idlote = Input::get('lote');
-                $nacimiento->idestado = Input::get('estado');
-                $nacimiento->idraza = Input::get('raza');
-                $nacimiento->save();
-                $nacimiento = Nacimiento::select('id','nombre','pedigree','fecha_nac')->where('id',$id)->get();
-                return $nacimiento;
+                $obj = entradas::find($id);
+                   $obj->nombre_ganado = Input::get('nombre');
+                $obj->codigo_ganado = Input::get('codigo_ganado');
+                $obj->sexo = Input::get('sexo');
+                $obj->fecha_ingreso = Input::get('fecha_ingreso');
+                $obj->idproveedor = Input::get('idproveedor');
+                $obj->idraza = Input::get('idraza');
+                $obj->caracteristicas = Input::get('caracteristicas');
+                $obj->observaciones = Input::get('observaciones');
+                $obj->procedencia = Input::get('procedencia');
+                $obj->color  = Input::get('color');
+                $obj->peso_ingreso  = Input::get('peso_ingreso');
+                $obj->edad = Input::get('edad');
+                $obj->precio_compra = Input::get('precio_compra');
+                $obj->costo_transporte = Input::get('costo_transporte');
+                $obj->costo_vaquero = Input::get('costo_vaquero');
+                $obj->save();
+                //$nacimiento = Nacimiento::select('id','nombre','pedigree','fecha_nac')->where('id',$id)->get();
+               $obj_datos = entradas::select('id','codigo_ganado','nombre_ganado','fecha_ingreso','color','precio_compra')->where('id',$id)->get();
+                return $obj_datos;
                 break;
             case 'del':
                 $id = Input::get('id');
-                $nacimiento = Nacimiento::find($id);
+                $nacimiento = entradas::find($id);
                 $nacimiento->estado = 0;
                 $nacimiento->save();
                 break;

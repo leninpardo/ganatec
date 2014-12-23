@@ -32,22 +32,23 @@ Route::get('logOut', 'BaseController@logOut');
 Route::get('menu','ModulosController@modulos');
 
 //Modulos
-Route::post('modulos/action', 'ModulosController@action');
-Route::post('modulos/editar','ModulosController@getEditar');
+Route::get('modulos/action', 'ModulosController@action');
+Route::get('modulos/editar','ModulosController@getEditar');
 Route::get('modulos/getModulo','ModulosController@getModulos');
 Route::get('modulos/getPadre','ModulosController@getPadre');
 Route::controller('modulos','ModulosController');
 
 //Empleados
-Route::post('empleados/action', 'UsersController@action');
-Route::post('empleados/editar','UsersController@getDatos');
+Route::get('empleados/action', 'UsersController@action');
+Route::get('empleados/editar','UsersController@getDatos');
 Route::get('empleados/getUser','UsersController@getUsers');
 Route::get('empleados/getPerfil','UsersController@getPerfils');
 Route::controller('empleados','UsersController');
 
 //Perfiles
-Route::post('perfiles/action', 'PerfilsController@action');
-Route::post('perfiles/editar','PerfilsController@getEditar');
+//Route::post('perfiles/action', 'PerfilsController@action');
+Route::post('perfiles/action','PerfilsController@action');
+Route::get('perfiles/editar','PerfilsController@getEditar');
 Route::get('perfiles/getPerfil','PerfilsController@getPerfils');
 Route::controller('perfiles','PerfilsController');
 
@@ -58,15 +59,15 @@ Route::post('permisos/elimina_permiso', 'PermisosController@EPermiso');
 Route::controller('permisos','PermisosController');
 
 //Razas
-Route::post('razas/action', 'RazasController@action');
-Route::post('razas/editar','RazasController@getEditar');
+Route::get('razas/action', 'RazasController@action');
+Route::get('razas/editar','RazasController@getEditar');
 Route::get('razas/get','RazasController@getRazas');
 Route::controller('razas','RazasController');
 
 
 //Tipo actividades
 //Route::post('sub_actividad/action', 'SubactividadController@action');
-Route::post('sub_actividad/editar','SubactividadesController@getEditar');
+Route::get('sub_actividad/editar','SubactividadesController@getEditar');
 Route::get('sub_actividad/getSub_actividad','SubactividadesController@getSub_actividad');
 Route::get('sub_actividad/action','SubactividadesController@action');
 //Route::get('sub_actividad/action','SubactividadesController@action');
@@ -81,8 +82,9 @@ Route::controller('etapas','EtapasController');*/
 
 
 //Entradas
-Route::post('entradas/action', 'EntradasController@action');
-Route::post('entradas/editar','EntradasController@getEditar');
+//Route::get('entradas/action', 'EntradasController@action');
+Route::get('entradas/editar','EntradasController@getEditar');
+Route::get('entradas/action','EntradasController@action');
 Route::get('entradas/getEntradas','EntradasController@getEntradas');
 Route::get('entradas/getProveedor','EntradasController@getProveedor');
 Route::get('entradas/getRaza','EntradasController@getRaza');
@@ -91,7 +93,8 @@ Route::controller('entradas','EntradasController');
 //actividades
 //Route::post('actividades/action', 'ActividadesController@action');
 Route::get('actividades/action','ActividadesController@action');
-Route::post('actividades/editar','ActividadesController@getEditar');
+Route::get('actividades/getGanado','ActividadesController@getGanado');
+Route::get('actividades/editar','ActividadesController@getEditar');
 Route::get('actividades/getactividades','ActividadesController@getActividades');
 Route::get('actividades/getSub_actividad','ActividadesController@getSub_actividad');
 Route::controller('actividades','ActividadesController');
@@ -103,17 +106,18 @@ Route::get('actividades/gettipoactividad','ActividadesController@getTipoActivida
 Route::controller('actividades','ActividadesController');*/
 
 //salidas
-Route::post('salidas/action', 'SalidasController@action');
-Route::post('salidas/editar','SalidasController@getEditar');
+Route::get('salidas/action', 'SalidasController@action');
+Route::get('salidas/editar','SalidasController@getEditar');
 Route::get('salidas/getSalida','SalidasController@getSalidas');
 Route::get('salidas/getGanado','SalidasController@getGanado');
 Route::controller('salidas','SalidasController');
 
 //proveedor
-Route::post('proveedor/action', 'ProveedorController@action');
-Route::post('proveedor/editar','ProveedorController@getEditar');
-Route::get('proveedor/getProveedor','ProveedorController@getProveedor');
-Route::controller('proveedor','ProveedorController');
+//Route::post('proveedor/action', 'ProveedoresController@action');
+Route::get('proveedor/action','ProveedoresController@action');
+Route::get('proveedor/editar','ProveedoresController@getEditar');
+Route::get('proveedor/getProveedor','ProveedoresController@getProveedor');
+Route::controller('proveedor','ProveedoresController');
 
 //Reportes
 Route::get('reporte_lista_animales', 'ReportesController@rep_x');
