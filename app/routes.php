@@ -119,18 +119,12 @@ Route::get('estados/getAnimal','ProduccionsController@getAnimal');
 Route::controller('estados','EstadosController');
 
 //Nacimientos
-Route::post('nacimientos/action', 'NacimientosController@action');
-Route::post('nacimientos/editar','NacimientosController@getEditar');
-Route::get('nacimientos/getNacimiento','NacimientosController@getNacimientos');
-Route::get('nacimientos/getServicio','NacimientosController@getServicio');
-Route::get('nacimientos/getPadreMadre','NacimientosController@getPadreMadre');
-Route::get('nacimientos/getCategoria','NacimientosController@getCategoria');
-Route::get('nacimientos/getEspecie','NacimientosController@getEspecie');
-Route::get('nacimientos/getEtapa','NacimientosController@getEtapa');
-Route::get('nacimientos/getLote','NacimientosController@getLote');
-Route::get('nacimientos/getEstado','NacimientosController@getEstado');
-Route::get('nacimientos/getRaza','NacimientosController@getRaza');
-Route::controller('nacimientos','NacimientosController');
+Route::post('entradas/action', 'EntradasController@action');
+Route::post('entradas/editar','EntradasController@getEditar');
+Route::get('entradas/getEntradas','EntradasController@getEntradas');
+Route::get('entradas/getProveedor','EntradasController@getProveedor');
+Route::get('entradas/getRaza','EntradasController@getRaza');
+Route::controller('entradas','EntradasController');
 
 //Servicios
 Route::post('servicios/action', 'ServiciosController@action');
@@ -140,20 +134,17 @@ Route::get('servicios/getTiposervicio','ServiciosController@getTiposervicios');
 Route::controller('servicios','ServiciosController');
 
 //Bajas
-Route::post('bajas/action', 'BajasController@action');
-Route::post('bajas/editar','BajasController@getEditar');
-Route::get('bajas/getBaja','BajasController@getBajas');
-Route::get('bajas/getAnimal','BajasController@getAnimal');
-Route::controller('bajas','BajasController');
+Route::post('salidas/action', 'SalidasController@action');
+Route::post('salidas/editar','SalidasController@getEditar');
+Route::get('salidas/getSalida','SalidasController@getSalidas');
+Route::get('salidas/getGanado','SalidasController@getGanado');
+Route::controller('salidas','SalidasController');
 
 //Enfermedades
-Route::post('enfermedades/action', 'EnfermedadsController@action');
-Route::post('enfermedades/editar','EnfermedadsController@getEditar');
-Route::get('enfermedades/getEnfermedad','EnfermedadsController@getEnfermedads');
-Route::get('enfermedades/getParcela','ProduccionsController@getParcela');
-Route::get('enfermedades/getLote','ProduccionsController@getLote');
-Route::get('enfermedades/getAnimal','ProduccionsController@getAnimal');
-Route::controller('enfermedades','EnfermedadsController');
+Route::post('proveedor/action', 'ProveedorController@action');
+Route::post('proveedor/editar','ProveedorController@getEditar');
+Route::get('proveedor/getProveedor','ProveedorController@getProveedor');
+Route::controller('proveedor','ProveedorController');
 
 //Control Materno
 Route::post('lactancias/action', 'LactanciasController@action');

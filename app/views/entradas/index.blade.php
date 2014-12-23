@@ -169,16 +169,16 @@
 <script type="text/javascript">
 
 	$('.load-footer').hide();
-    var url = 'nacimientos';
+    var url = 'entradas';
     var grid_table = $(".table-responsive");
-    var col_names = ['Item', 'Nombre', 'Pedigree', 'Fecha Nacimiento', ''];
+    var col_names = ['Item', 'Nombre', 'codigo', 'fecha ingreso','color','precio compra', ''];
     var accion = ['edit','delete'];
-    loadTable('GET', url+'/getNacimiento', url, grid_table, col_names, accion);
+    loadTable('GET', url+'/getEntradas', url, grid_table, col_names, accion);
     
     var servicio = $("#servicio");
     $.ajax({
         type: 'GET',
-        url: url+'/getServicio',
+        url: url+'/getProveedor',
         beforeSend: function() {
             servicio.html(cargando);
         },
@@ -189,7 +189,20 @@
             servicio.empty().html(cadena);
         }
     });
-
+ var raza = $("#raza");
+    $.ajax({
+        type: 'GET',
+        url: url+'/getRaza',
+        beforeSend: function() {
+            servicio.html(cargando);
+        },
+        success: function(data) {
+            var cadena = '<option value="">Seleccione...</option>';
+            for(var i=0; i<data.length; i++)
+                cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
+            servicio.empty().html(cadena);
+        }
+    });
     var padre = $("#npadre");
     var madre = $("#nmadre");
     $.ajax({
@@ -208,7 +221,7 @@
         }
     });
 
-    var select1 = $("#categoria");
+/*    var select1 = $("#categoria");
     $.ajax({
         type: 'GET',
         url: url+'/getCategoria',
@@ -281,7 +294,7 @@
                 cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
             select6.empty().html(cadena);
         }
-    });
+    });*/
 
     var validar = function(url)
     {

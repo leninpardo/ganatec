@@ -1,6 +1,6 @@
 <?php
 
-class BajasController extends \BaseController {
+class SalidasController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class BajasController extends \BaseController {
     }
 
     public function getIndex() {
-        return View::make('bajas.index');
+        return View::make('salidas.index');
     }
 
     /**
@@ -30,22 +30,22 @@ class BajasController extends \BaseController {
         //
     }
 
-    public function getBajas() {
-        $bajas = DB::table('bajas as b')
-                    ->join('nacimientos as n','b.idanimal','=','n.id')
-                    ->select('b.id','b.descripcion','n.nombre as animal', 'b.fecha')
-        			->where('b.estado', '1')
-        			->orderBy('b.id', 'DESC')
+    public function getSalidas() {
+        $bajas = DB::table('Salidas as s')
+                    ->join('tipo_salida as tp','tp.idtipo_salida','=','s.tipo_salida')
+                    ->select('s.idsalida','s.fecha_salida','s.total_venta', 'tp.tipo_salida')
+        			->where('s.estado', '1')
+        			->orderBy('s.idsalida', 'DESC')
         			->get();
         return $bajas;
     }
 
-    public function getAnimal()
+    public function getGanado()
     {
-        $bajas = DB::table('nacimientos as n')
-                    ->select('n.id','n.nombre as descripcion')
+        $bajas = DB::table('vista_ganado as vg')
+                    ->select('vg.*')
                     //->whereNotIn('n.id', DB::table('bajas as b')->where('b.estado',1)->lists('b.idanimal')->get('b.idanimal'))
-                    ->where('n.estado', 1)
+                    //->where('vg.estado', 1)
                     ->get();
         return $bajas;
     }

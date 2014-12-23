@@ -1,6 +1,6 @@
 <?php
 
-class EnfermedadsController extends \BaseController {
+class ProveedorController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class EnfermedadsController extends \BaseController {
     }
 
     public function getIndex() {
-        return View::make('enfermedads.index');
+        return View::make('proveedor.index');
     }
 
     /**
@@ -30,24 +30,22 @@ class EnfermedadsController extends \BaseController {
         //
     }
 
-    public function getEnfermedads() {
-        $enfermedads = DB::table('enfermedads as e')
-                    ->join('nacimientos as n','e.idanimal','=','n.id')
-                    ->join('lotes as l','l.id','=','n.idlote')
-                    ->select('e.id','e.descripcion','n.nombre','l.descripcion as lote')
-        			->where('e.estado', '1')
-        			->orderBy('e.id', 'DESC')
+    public function getProveedor() {
+        $proveedor = DB::table('proveedores as p')
+                    ->select('p.idproveedor','p.razon_social','p.ruc','p.direccion')
+        			->where('p.estado', '1')
+        			->orderBy('p.idproveedor', 'DESC')
         			->get();
-        return $enfermedads;
+        return $proveedor;
     }
 
     public function getEditar()
     {
         $id = Input::get('id');
-        $enfermedads = Enfermedad::select('id','descripcion')
-                    ->where('id', $id)
+        $proveedor = proveedores::select('idproveedor','nombre','razon_social','ruc','direccion')
+                    ->where('idproveedor', $id)
                     ->get();
-        return $enfermedads;
+        return $proveedor;
     }
 
     /**

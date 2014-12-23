@@ -87,10 +87,28 @@ var loadTable = function(tipo, urlajax, urltable, gridtable, columnas, accions)
         }
     });
 }
-
-var tabla = function(url, datos, columnas, gridtable, actions)
+var loadTable_check = function(tipo, urlajax, urltable, gridtable, columnas, accions) 
 {
-    var capa = $('<table class="table table-striped table-bordered table-hover" id="dataTable"></table>');
+    botones_acciones = accions;
+    $.ajax({
+        type: tipo,
+        url: urlajax,
+        beforeSend: function() {
+            deshabilitar();
+            gridtable.html(cargando);
+        },
+        success: function(datos) {          
+            tabla_check(urltable, datos, columnas, gridtable, accions);
+        },
+        error: function() {
+            gridtable.html('hubo un error al recuperar los datos');
+        }
+    });
+}
+
+var tabla_check = function(url, datos, columnas, gridtable, actions)
+{
+    var capa = $('<table class="table table-striped table-bordered table-hover" id="dataTable1"></table>');
     var cabecera = $('<thead></thead>');
     var cabecera_tr = $('<tr></tr>');
     cabecera.append(cabecera_tr);
@@ -109,9 +127,69 @@ var tabla = function(url, datos, columnas, gridtable, actions)
         var cuerpo_tr = $('<tr></tr>');
         cuerpo.append(cuerpo_tr);
         var data = datos[i];
+        j=1;
         for( var property in data ){
+            if(i==0&&j==1){
+               var body = $('<td><input type="checkbox" id="idanimal[]" name="idanimal[]" class="animal" />'+'</td>');  
+            }else{
+                 var body = $('<td>'+data[property]+'</td>');
+            }
+            
+           
+            cuerpo_tr.append(body);  
+            j++;
+        }
+        i++;
+        var td_accions = $('<td></td>');
+        var botones = generar_botones(url,id_tr);
+        td_accions.append(botones);
+        cuerpo_tr.append(td_accions);
+    });
+    
+    $(gridtable).html(capa);
+    
+    $('#dataTable').dataTable({
+        "order": [[ 0, "desc" ]]
+    });
+$('#dataTable1').dataTable({
+        "order": [[ 0, "desc" ]]
+    });
+    tool_tip();
+
+    habilitar();    
+}
+
+
+var tabla = function(url, datos, columnas, gridtable, actions)
+{
+    var capa = $('<table class="table table-striped table-bordered table-hover" id="dataTable"></table>');
+    var cabecera = $('<thead></thead>');
+    var cabecera_tr = $('<tr></tr>');
+    cabecera.append(cabecera_tr);
+    capa.append(cabecera);
+    jQuery.each(columnas, function()
+    {
+        var header = $('<th>'+this+'</th>');
+        cabecera_tr.append(header);
+    });
+    var cuerpo = $('<tbody></tbody>');
+    capa.append(cuerpo);
+    var i=0;
+    jQuery.each(datos, function()
+    {
+        //var id_tr = this.id;
+        var cuerpo_tr = $('<tr></tr>');
+        cuerpo.append(cuerpo_tr);
+        var data = datos[i];
+        j=1;
+        for( var property in data ){
+            if(i==0&&j==1)
+            {
+               var id_tr = data[property]; 
+            }
             var body = $('<td>'+data[property]+'</td>');
-            cuerpo_tr.append(body);   
+            cuerpo_tr.append(body);
+            j++;
         }
         i++;
         var td_accions = $('<td></td>');

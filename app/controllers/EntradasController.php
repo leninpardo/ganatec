@@ -1,6 +1,6 @@
 <?php
 
-class NacimientosController extends \BaseController
+class EntradasController extends \BaseController
 {
 
     /**
@@ -21,7 +21,7 @@ class NacimientosController extends \BaseController
     
     public function getIndex() 
     {
-        return View::make('nacimientos.index');
+        return View::make('entradas.index');
     }
 
     /**
@@ -30,63 +30,23 @@ class NacimientosController extends \BaseController
      * @return Response
      */
 
-    public function getNacimientos() 
+    public function getEntradas() 
     {
-        $nacimientos = Nacimiento::select('id','nombre','pedigree','fecha_nac')
+        $nacimientos = entradas::select('idingreso','codigo_ganado','nombre_ganado','fecha_ingreso','color','precio_compra')
                     ->where('estado', '1')
-                    ->orderBy('id', 'DESC')
+                    ->orderBy('idingreso', 'DESC')
                     ->get();
         return $nacimientos;
     }
 
-    public function getServicio() 
+    public function getProveedor() 
     {
-        $nacimientos = Servicio::select('id','descripcion')
+        $nacimientos = proveedores::select('idproveedor','descripcion')
                     ->where('estado', '1')
-                    ->orderBy('id', 'DESC')
+                    ->orderBy('idproveedor', 'DESC')
                     ->get();
         return $nacimientos;
-    }
-    public function getCategoria() 
-    {
-        $nacimientos = Categoria::select('id','descripcion')
-                    ->where('estado', '1')
-                    ->orderBy('id', 'DESC')
-                    ->get();
-        return $nacimientos;
-    }    
-    public function getEspecie() 
-    {
-        $nacimientos = Especie::select('id','descripcion')
-                    ->where('estado', '1')
-                    ->orderBy('id', 'DESC')
-                    ->get();
-        return $nacimientos;
-    }
-    public function getEtapa() 
-    {
-        $nacimientos = Etapa::select('id','descripcion')
-                    ->where('estado', '1')
-                    ->orderBy('id', 'DESC')
-                    ->get();
-        return $nacimientos;
-    }
-    public function getLote() 
-    {
-        $nacimientos = Lote::select('id','descripcion')
-                    ->where('estado', '1')
-                    ->orderBy('id', 'DESC')
-                    ->get();
-        return $nacimientos;
-    }
-    public function getEstado() 
-    {
-        $nacimientos = Estado::select('id','descripcion')
-                    ->where('estado', '1')
-                    ->orderBy('id', 'DESC')
-                    ->get();
-        return $nacimientos;
-    }   
+    } 
     public function getRaza() 
     {
         $nacimientos = Raza::select('id','descripcion')
@@ -95,14 +55,7 @@ class NacimientosController extends \BaseController
                     ->get();
         return $nacimientos;
     } 
-    public function getPadreMadre() 
-    {
-        $nacimientos = Nacimiento::select('id','nombre')
-                    ->where('estado', '1')
-                    ->orderBy('id', 'DESC')
-                    ->get();
-        return $nacimientos;
-    }
+
 
     public function getEditar()
     {

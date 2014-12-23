@@ -2,8 +2,8 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        Lista de Bajas
-        <a href="#modal-form" role="button" data-toggle="modal" onclick="cargar_animal()" class="btn btn-default pull-right btn-add">
+        Lista de Salidas de ganado
+        <a href="#modal-form" role="button" data-toggle="modal" onclick="cargar_ganado()" class="btn btn-default pull-right btn-add">
             <i class="fa fa-plus"></i>
             Agregar
         </a>
@@ -25,38 +25,31 @@
                 <div id="bodymodal">
                     <form class="form-horizontal" id='formulario'>
                         <div class="form-group has-info">
-                            <label for="descripcion" class="col-xs-12 col-sm-3 control-label no-padding-right">
-                                Descripción
+                            <label for="fecha salida" class="col-xs-12 col-sm-3 control-label no-padding-right">
+                                Fecha salida
                             </label>
                             <div class="col-xs-12 col-sm-8">
                                 <span class="block input-icon input-icon-right">
-                                    <input type="hidden" id="id_main" name="id" />
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control"  />
+                                    <input type="hidden" id="id_main" name="idsalida" />
+                                    <input type="text" id="fecha_salida" name="fecha_salida" class="form-control"  />
                                     <i class="icon-pencil"></i>
                                 </span>
                             </div>
                         </div>
                         <div class="form-group has-info">
                             <label for="animal" class="col-xs-12 col-sm-3 control-label no-padding-right">
-                                Animal
+                                Descripcion
                             </label>
                             <div class="col-xs-12 col-sm-8">
                                 <span class="">                                   
-                                    <select id='animal' name="animal" class="form-control">
-                                    </select>
+                                    <textarea name="observacion" id="observacion">
+                                        
+                                    </textarea>
                                 </span>
                             </div>
                         </div>
-                        <div class="form-group has-info">
-                            <label for="fecha" class="col-xs-12 col-sm-3 control-label no-padding-right">
-                                Fecha
-                            </label>
-                            <div class="col-xs-12 col-sm-8">
-                                <span class="">                                   
-                                    <input type="date" id='fecha' name="fecha" class="form-control">
-                                </span>
-                            </div>
-                        </div>
+                        <div class="table-responsive1"></div>
+                      
                     </form>
                 </div>
             </div>
@@ -82,20 +75,27 @@
 <script type="text/javascript">
     
     $('.load-footer').hide();
-    var url = 'bajas';
+    var url = 'salidas';
     var grid_table = $(".table-responsive");
+     
     var col_names = ['Item', 'Descripción', 'Animal', 'Fecha',''];
-    var accion = [];
+    var accion = ['edit','delete'];
 
-    loadTable('GET', url+'/getBaja', url, grid_table, col_names, accion);
+    loadTable('GET', url+'/getSalida', url, grid_table, col_names, accion);
 
-    var cargar_animal = function()
+    var cargar_ganado = function()
     {
         nuevo();
-        var animal = $("#animal");
+     grid_table = $(".table-responsive1");
+     // var col_names = ['Item', 'Descripción', 'Animal', 'Fecha',''];
+     col_names = ['Item', 'nombre ganado', 'peso ingreso', 'costo compra','costo venta'];
+    accion = [];
+    var grid_table = $(".table-responsive1");
+        loadTable_check('GET', url+'/getGanado', url, grid_table, col_names, accion);
+        /*var animal = $("#animal");
         $.ajax({
             type: 'GET',
-            url: url+'/getAnimal',
+            url: url+'/getGanado',
             beforeSend: function() {
                 animal.html(cargando);
             },
@@ -105,15 +105,14 @@
                     cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
                 animal.empty().html(cadena);
             }
-        });
+        });*/
     }
     
     var validar = function(url)
     {
         bval = true;   
         bval = bval && $("#descripcion").required();
-        bval = bval && $("#animal").required();
-        bval = bval && $("#fecha").required();
+        bval = bval && $("#fecha_salida").required();
         
         if (bval) 
         {

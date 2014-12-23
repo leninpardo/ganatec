@@ -1,5 +1,5 @@
 <?php
 
-class Enfermedad extends Eloquent {
+class salida extends Eloquent {
 	protected $fillable = ['id','descripcion'];
 }
