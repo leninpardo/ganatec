@@ -39,12 +39,43 @@
                         </div>
                         <div class="form-group has-info">
                             <label for="padre" class="col-xs-12 col-sm-3 control-label no-padding-right">
-                                Tipo de Servicio
+                                Sub actividades
                             </label>
                             <div class="col-xs-12 col-sm-8">
                                 <span class="">                                   
-                                    <select id='tiposervicio' name="tiposervicio" class="form-control">
+                                    <select id='subactividad' name="subactividad" class="form-control">
                                     </select>
+                                </span>
+                            </div>
+                        </div>
+                        
+                           <div class="form-group has-info">
+                            <label for="fecha" class="col-xs-12 col-sm-3 control-label no-padding-right">
+                                Fecha Actividad
+                            </label>
+                            <div class="col-xs-12 col-sm-8">
+                                <span class="">                                   
+                                    <input type="date" date-data-format="yy-mm-dd" name="fecha_actividad" id="fecha_actividad"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group has-info">
+                            <label for="cantidad" class="col-xs-12 col-sm-3 control-label no-padding-right">
+                                Cantidad
+                            </label>
+                            <div class="col-xs-12 col-sm-8">
+                                <span class="">                                   
+                                    <input type="text" name="cantidad" id="cantidad"/>
+                                </span>
+                            </div>
+                        </div>
+                         <div class="form-group has-info">
+                            <label for="precio" class="col-xs-12 col-sm-3 control-label no-padding-right">
+                                precio
+                            </label>
+                            <div class="col-xs-12 col-sm-8">
+                                <span class="">                                   
+                                    <input type="text" name="precio" id="precio"/>
                                 </span>
                             </div>
                         </div>
@@ -53,7 +84,7 @@
             </div>
             <div class="modal-footer">
                 <div class="btn-footer">
-                    <button class="btn btn-primary" onclick="validar('servicios')" id="btn-save">
+                    <button class="btn btn-primary" onclick="validar('actividades')" id="btn-save">
                         <i class='icon-ok'></i>
                         Guardar
                     </button>
@@ -73,28 +104,28 @@
 <script type="text/javascript">
     
     $('.load-footer').hide();
-    var url = 'servicios';
+    var url = 'actividades';
     var grid_table = $(".table-responsive");
-    var col_names = ['Item', 'Descripción', 'Tipo de Servicio', ''];
+    var col_names = ['Item','fecha', 'Descripción', 'Tipo de actividad', 'precio',''];
     var accion = ['edit','delete'];
 
-    loadTable('GET', url+'/getServicio', url, grid_table, col_names, accion);
+    loadTable('GET', url+'/getactividades', url, grid_table, col_names, accion);
 
-    var tiposervicio = $("#tiposervicio");
+    var subactividad = $("#subactividad");
     $.ajax({
         type: 'GET',
-        url: url+'/getTiposervicio',
+        url: url+'/getSub_actividad',
         beforeSend: function() {
-            tiposervicio.html(cargando);
+            subactividad.html(cargando);
         },
         success: function(data) {
             var cadena = '';
             for(var i=0; i<data.length; i++)
                 cadena += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>';
-            tiposervicio.empty().html(cadena);
+            subactividad.empty().html(cadena);
             //set_chosen();
         }
-    })
+    });
     
     var validar = function(url)
     {
@@ -112,7 +143,10 @@
     {
         $("#id_main").val(data[0].id);
         $("#descripcion").val(data[0].descripcion);
-        $("#tiposervicio").val(data[0].idtiposervicio);
+        $("#subactividad").val(data[0].sub_actividad);
+        $("#fecha_actividad").val(data[0].fecha_actividad);
+        $("#cantidad").val(data[0].cantidad);
+        $("#precio").val(data[0].precio);
         //set_chosen();
     }
 

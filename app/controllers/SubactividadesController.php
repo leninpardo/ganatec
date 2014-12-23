@@ -1,6 +1,6 @@
 <?php
 
-class TipoactividadesController extends \BaseController {
+class SubactividadesController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class TipoactividadesController extends \BaseController {
     }
 
     public function getIndex() {
-        return View::make('tiposervicios.index');
+        return View::make('sub_actividad.index');
     }
 
     /**
@@ -30,8 +30,8 @@ class TipoactividadesController extends \BaseController {
         //
     }
 
-    public function getTiposervicios() {
-        $tiposervicios = Tiposervicio::select('id','descripcion')
+    public function getSub_actividad() {
+        $tiposervicios = subactividades::select('id','descripcion')
         			->where('estado', '1')
         			->orderBy('id', 'DESC')
         			->get();
@@ -41,7 +41,7 @@ class TipoactividadesController extends \BaseController {
     public function getEditar()
     {
         $id = Input::get('id');
-        $tiposervicios = Tiposervicio::select('id','descripcion')
+        $tiposervicios = subactividades::select('id','descripcion')
                     ->where('id', $id)
                     ->get();
         return $tiposervicios;
@@ -54,7 +54,7 @@ class TipoactividadesController extends \BaseController {
      */
     public function action() {
 
-        $tiposervicio = new Tiposervicio;
+        $tiposervicio = new subactividades();
 
         $operacion = Input::get('oper');
 
@@ -64,22 +64,22 @@ class TipoactividadesController extends \BaseController {
                 $tiposervicio->descripcion = Input::get('descripcion');
                 $tiposervicio->estado = 1;
                 $tiposervicio->save();
-                $tiposervicio = Tiposervicio::select('id','descripcion')->orderBy('id','desc')->take(1)->get();
+                $tiposervicio = subactividades::select('id','descripcion')->orderBy('id','desc')->take(1)->get();
                 return $tiposervicio;
                 break;
 
             case 'edit':
                 $id = Input::get('id');
-                $tiposervicio = Tiposervicio::find($id);
+                $tiposervicio = subactividades::find($id);
                 $tiposervicio->descripcion = Input::get('descripcion');
                 $tiposervicio->save();
-                $tiposervicio = Tiposervicio::select('id','descripcion')->where('id',$id)->get();
+                $tiposervicio = subactividades::select('id','descripcion')->where('id',$id)->get();
                 return $tiposervicio;
                 break;
 
             case 'del':
                 $id = Input::get('id');
-                $tiposervicio = Tiposervicio::find($id);
+                $tiposervicio = subactividades::find($id);
                 $tiposervicio->estado = 0;
                 $tiposervicio->save();
                 break;

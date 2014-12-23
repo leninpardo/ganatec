@@ -177,16 +177,13 @@ var tabla = function(url, datos, columnas, gridtable, actions)
     var i=0;
     jQuery.each(datos, function()
     {
-        //var id_tr = this.id;
+        var id_tr = this.id;
         var cuerpo_tr = $('<tr></tr>');
         cuerpo.append(cuerpo_tr);
         var data = datos[i];
         j=1;
         for( var property in data ){
-            if(i==0&&j==1)
-            {
-               var id_tr = data[property]; 
-            }
+           
             var body = $('<td>'+data[property]+'</td>');
             cuerpo_tr.append(body);
             j++;
@@ -217,7 +214,7 @@ var eliminar = function(url, id)
             var row = $('.delete_'+id).closest("tr").get(0);
             dt.fnDeleteRow(dt.fnGetPosition(row));
             $.ajax({
-                type: 'POST',
+                type: 'get',
                 url: url+'/action',
                 data: 
                     'id='+ id + '&'+
@@ -246,7 +243,7 @@ var guardar = function(urlp)
         oper = 'add';
     }
     $.ajax({
-        type:"POST",
+        type:"GET",
         url:ruta,
         data:
             'oper='+oper+'&'+
@@ -319,7 +316,7 @@ var editar = function(url, id)
     limpiar();
     $("#myModalLabel").html('Actualizar');
     $.ajax({
-        type:"POST",
+        type:"get",
         url:url+'/editar',
         data: 
             'id='+ id

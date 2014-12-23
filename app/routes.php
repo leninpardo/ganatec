@@ -65,10 +65,12 @@ Route::controller('razas','RazasController');
 
 
 //Tipo actividades
-Route::post('tipoactividades/action', 'TipoactividadesController@action');
-Route::post('tipoactividades/editar','TipoactividadesController@getEditar');
-Route::get('tipoactividades/getTipoactividades','TipoactividadesController@getTipoactividades');
-Route::controller('tipoactividades','TipoactividadesController');
+//Route::post('sub_actividad/action', 'SubactividadController@action');
+Route::post('sub_actividad/editar','SubactividadesController@getEditar');
+Route::get('sub_actividad/getSub_actividad','SubactividadesController@getSub_actividad');
+Route::get('sub_actividad/action','SubactividadesController@action');
+//Route::get('sub_actividad/action','SubactividadesController@action');
+Route::controller('sub_actividad','SubactividadesController');
 
 //Etapas
 /*Route::post('etapas/action', 'EtapasController@action');
@@ -78,7 +80,7 @@ Route::controller('etapas','EtapasController');*/
 
 
 
-//Estados
+//Entradas
 Route::post('entradas/action', 'EntradasController@action');
 Route::post('entradas/editar','EntradasController@getEditar');
 Route::get('entradas/getEntradas','EntradasController@getEntradas');
@@ -87,11 +89,18 @@ Route::get('entradas/getRaza','EntradasController@getRaza');
 Route::controller('entradas','EntradasController');
 
 //actividades
-Route::post('actividades/action', 'ActividadesController@action');
+//Route::post('actividades/action', 'ActividadesController@action');
+Route::get('actividades/action','ActividadesController@action');
 Route::post('actividades/editar','ActividadesController@getEditar');
-Route::get('actividades/getactividad','ActividadesController@getActividades');
-Route::get('actividades/gettipoactividad','ActividadesController@getTipoActividades');
+Route::get('actividades/getactividades','ActividadesController@getActividades');
+Route::get('actividades/getSub_actividad','ActividadesController@getSub_actividad');
 Route::controller('actividades','ActividadesController');
+
+/*Route::post('actividades/action', 'ActividadesController@action');
+Route::post('actividades/editar','ActividadesController@getEditar');
+Route::get('actividades/getactividades','ActividadesController@getActividades');
+Route::get('actividades/gettipoactividad','ActividadesController@getTipoActividades');
+Route::controller('actividades','ActividadesController');*/
 
 //salidas
 Route::post('salidas/action', 'SalidasController@action');

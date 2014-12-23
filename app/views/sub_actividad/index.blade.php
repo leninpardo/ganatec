@@ -1,7 +1,7 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		Lista de Tipo Servicios
+		Lista de tipo de actividades
 		<a href="#modal-form" role="button" data-toggle="modal" onclick="nuevo()" class="btn btn-default pull-right btn-add">
 			<i class="fa fa-plus"></i>
 			Agregar
@@ -41,7 +41,7 @@
 		    </div>
 		    <div class="modal-footer">
 				<div class="btn-footer">
-				    <button class="btn btn-primary" onclick="validar('tipo_servicios')" id="btn-save">
+				    <button class="btn btn-primary" onclick="validar('sub_actividad')" id="btn-save">
 				    	<i class='icon-ok'></i>
 				    	Guardar
 				    </button>
@@ -61,11 +61,11 @@
 <script type="text/javascript">
 
 	$('.load-footer').hide();
-    var url = 'tipo_servicios';
+    var url = 'sub_actividad';
     var grid_table = $(".table-responsive");
     var col_names = ['Item', 'Descripción', ''];
     var accion = ['edit','delete'];
-    loadTable('GET', url+'/getTiposervicio', url, grid_table, col_names, accion);
+    loadTable('GET', url+'/getSub_actividad', url, grid_table, col_names, accion);
     
     var validar = function(url)
     {

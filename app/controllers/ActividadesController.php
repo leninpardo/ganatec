@@ -20,7 +20,7 @@ class ActividadesController extends BaseController {
     
     public function getIndex()
     {
-        return View::make('servicios.index');
+        return View::make('actividades.index');
     }
 
     /**
@@ -29,13 +29,13 @@ class ActividadesController extends BaseController {
      * @return Response
      */
 
-    public function getServicios()
+    public function getActividades()
     {
-        $servicios = DB::table('servicios as l')
-                    ->join('tiposervicios as p','l.idtiposervicio','=','p.id')
-                    ->select('l.id','l.descripcion','p.descripcion as tiposervicio')
-                    ->where('l.estado','1')
-                    ->orderBy('l.id','DESC')
+        $servicios = DB::table('actividades as a')
+                    ->join('subactividades as sa','a.sub_actividad','=','sa.id')
+                    ->select('a.id','a.fecha_actividad','a.descripcion','sa.descripcion as tip','a.precio as costo')
+                    ->where('a.estado','1')
+                    ->orderBy('a.id','DESC')
                     ->get();
         return $servicios;
     }   
@@ -43,15 +43,15 @@ class ActividadesController extends BaseController {
     public function getEditar()
     {
         $id = Input::get('id');
-        $servicios = Servicio::select('id','descripcion','idtiposervicio')
+        $servicios = Actividades::select('*')
                     ->where('id', $id)
                     ->get();
         return $servicios;
     }
 
-    public function getTipoServicios()
+    public function getSub_actividad()
     {
-        $servicios = Tiposervicio::select('id','descripcion')
+        $servicios = subactividades::select('id','descripcion')
                     ->where('estado','1')
                     ->get();
         return $servicios;
@@ -59,7 +59,7 @@ class ActividadesController extends BaseController {
 
     public function action() {
 
-        $servicio = new Servicio;
+        $servicio = new Actividades();
 
         $operacion = Input::get('oper');
 
@@ -67,33 +67,42 @@ class ActividadesController extends BaseController {
 
             case 'add':
                 $servicio->descripcion = Input::get('descripcion');
-                $servicio->idtiposervicio = Input::get('tiposervicio');
+                $servicio->sub_actividad = Input::get('subactividad');
+                $servicio->fecha_actividad = Input::get('fecha_actividad');
+                $servicio->cantidad = Input::get('cantidad');
+                $servicio->precio   = Input::get('precio');
                 $servicio->estado = 1;
                 $servicio->save();
-                $servicio = DB::table('servicios as l')
-                            ->join('tiposervicios as p','l.idtiposervicio','=','p.id')
-                            ->select('l.id','l.descripcion','p.descripcion as tiposervicio')
-                            ->orderBy('id','desc')->take(1)->get();
+                $servicio =DB::table('actividades as a')
+                    ->join('subactividades as sa','a.sub_actividad','=','sa.id')
+                    ->select('a.id','a.fecha_actividad','a.descripcion','sa.descripcion as tip','a.precio as costo')
+                    ->where('a.estado','1')
+                    ->orderBy('a.id','DESC')->take(1)->get();
                 return $servicio;
                 break;
 
             case 'edit':
                 $id = Input::get('id');
-                $servicio = Servicio::find($id);
-                $servicio->descripcion = Input::get('descripcion');
-                $servicio->idtiposervicio = Input::get('tiposervicio');
+                $servicio = Actividades::find($id);
+               $servicio->descripcion = Input::get('descripcion');
+                $servicio->sub_actividad = Input::get('subactividad');
+                $servicio->fecha_actividad = Input::get('fecha_actividad');
+                $servicio->cantidad = Input::get('cantidad');
+                $servicio->precio   = Input::get('precio');
+                
                 $servicio->save();
-                $servicio = DB::table('servicios as l')
-                            ->join('tiposervicios as p','l.idtiposervicio','=','p.id')
-                            ->select('l.id','l.descripcion','p.descripcion as tiposervicio')
-                            ->where('l.id',$id)
-                            ->get();
+                $servicio =DB::table('actividades as a')
+                    ->join('subactividades as sa','a.sub_actividad','=','sa.id')
+                    ->select('a.id','a.fecha_actividad','a.descripcion','sa.descripcion as tip','a.precio as costo')
+       
+                        ->where('a.id',$id)
+                   ->get();
                 return $servicio;
                 break;
 
             case 'del':
                 $id = Input::get('id');
-                $servicio = Servicio::find($id);
+                $servicio = Actividades::find($id);
                 $servicio->estado = 0;
                 $servicio->save();
                 break;
