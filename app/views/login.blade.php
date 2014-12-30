@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
 	<meta charset="UTF-8">
-	<title>CONTROL ANIMAL</title>
+	<title>Sistema de control de ganado::Ganatec::</title>
 
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />

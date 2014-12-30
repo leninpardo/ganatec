@@ -107,11 +107,11 @@ Route::controller('actividades','ActividadesController');*/
 
 //salidas
 Route::get('salidas/action', 'SalidasController@action');
+Route::get('salidas/getTipo', 'SalidasController@getTipo');
 Route::get('salidas/editar','SalidasController@getEditar');
 Route::get('salidas/getSalida','SalidasController@getSalidas');
 Route::get('salidas/getGanado','SalidasController@getGanado');
 Route::controller('salidas','SalidasController');
-
 //proveedor
 //Route::post('proveedor/action', 'ProveedoresController@action');
 Route::get('proveedor/action','ProveedoresController@action');
@@ -120,11 +120,6 @@ Route::get('proveedor/getProveedor','ProveedoresController@getProveedor');
 Route::controller('proveedor','ProveedoresController');
 
 //Reportes
-Route::get('reporte_lista_animales', 'ReportesController@rep_x');
-Route::get('reporte_listado_produccion', 'ReportesController@rep_y');
-Route::get('reporte_nacimientos_fecha', 'ReportesController@rep_z');
-Route::get('reporte_nacimientos_fecha/getFecha', 'ReportesController@get_z');
-Route::get('reporte_bajas_fecha', 'ReportesController@rep_a');
-Route::get('reporte_bajas_fecha/getFecha', 'ReportesController@get_a');
-Route::get('reporte_animales_parir', 'ReportesController@rep_b');
-Route::get('reporte_animales_parir/getFecha', 'ReportesController@get_b');
+Route::get('reporte_lista_ganado', 'ReportesController@rep_ganado');
+Route::get('reporte_listado_actividades', 'ReportesController@rep_actividades');
+Route::get('reporte_listado_salidas', 'ReportesController@rep_salidas');

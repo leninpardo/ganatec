@@ -32,10 +32,10 @@ class SalidasController extends \BaseController {
 
     public function getSalidas() {
         $bajas = DB::table('Salidas as s')
-                    ->join('tipo_salida as tp','tp.idtipo_salida','=','s.tipo_salida')
-                    ->select('s.idsalida','s.fecha_salida','s.total_venta', 'tp.tipo_salida')
+                    ->join('tipo_salida as tp','tp.id','=','s.tipo_salida')
+                    ->select('s.id','s.fecha_salida','s.total_venta', 'tp.tipo_salida')
         			->where('s.estado', '1')
-        			->orderBy('s.idsalida', 'DESC')
+        			->orderBy('s.id', 'DESC')
         			->get();
         return $bajas;
     }
@@ -49,6 +49,15 @@ class SalidasController extends \BaseController {
                     ->get();
         return $bajas;
     }
+        public function getTipo()
+    {
+        $bajas = DB::table('tipo_salida')
+                    ->select('*')
+                    //->whereNotIn('n.id', DB::table('bajas as b')->where('b.estado',1)->lists('b.idanimal')->get('b.idanimal'))
+                    //->where('vg.estado', 1)
+                    ->get();
+        return $bajas;
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -57,23 +66,44 @@ class SalidasController extends \BaseController {
      */
     public function action() {
 
-        $baja = new Baja;
+        $obj = new salidas();
 
         $operacion = Input::get('oper');
 
         switch ($operacion) {
 
             case 'add':
-                $baja->descripcion = Input::get('descripcion');
-                $baja->idanimal = Input::get('animal');
-                $baja->fecha = Input::get('fecha');
-                $baja->estado = 1;
-                $baja->save();
-                $baja = DB::table('bajas as b')
-                            ->join('nacimientos as n','b.idanimal','=','n.id')
-                            ->select('b.id','b.descripcion','n.nombre as animal','b.fecha')
-                            ->orderBy('b.id','desc')->take(1)->get();
-                return $baja;
+                $obj->descripcion = Input::get('descripcion');
+                $obj->tipo_salida = Input::get('tipo');
+                $obj->fecha_salida = Input::get('fecha_salida');
+                $obj->total_venta = Input::get('total');
+                $obj->estado = 1;
+                $obj->save();
+                $obj = DB::table('salidas as s')
+                           ->join('tipo_salida as tp','tp.id','=','s.tipo_salida')
+                    ->select('s.id','s.fecha_salida','s.total_venta', 'tp.tipo_salida')
+                            ->orderBy('id','desc')->take(1)->get();
+            require_once '../app/models/detalle_salidas.php';
+            require_once '../app/models/entradas.php';
+                $obj_d=new detalle_salidas();
+                $obj_e=new entradas();
+                   $obj_d->id_salida=$obj[0]->id;
+            foreach (input::get('idanimal') as $g)
+            {
+                $obj_d->id_ganado=$g;
+                $obj_d->precio_venta=  Input::get("pv".$g);
+                $obj_d->peso_salida=  Input::get("pf".$g);
+                $obj_d->save();
+                //deshabilitar el registro del ganado
+               
+                $id = Input::get('id');
+                $ganado = $obj_e::find($id);
+                $ganado->estado=0;
+                $ganado->save();
+                
+            }
+                
+        return $obj;
                 break;
         }
     }

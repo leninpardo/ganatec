@@ -129,8 +129,8 @@ var tabla_check = function(url, datos, columnas, gridtable, actions)
         var data = datos[i];
         j=1;
         for( var property in data ){
-            if(i==0&&j==1){
-               var body = $('<td><input type="checkbox" id="idanimal[]" name="idanimal[]" class="animal" />'+'</td>');  
+            if(j==1){
+               var body = $('<td><input type="checkbox" id="idanimal[]" value="'+data[property]+'" name="idanimal[]" class="ganado" />'+'</td>');  
             }else{
                  var body = $('<td>'+data[property]+'</td>');
             }
@@ -140,7 +140,8 @@ var tabla_check = function(url, datos, columnas, gridtable, actions)
             j++;
         }
         i++;
-        var td_accions = $('<td></td>');
+        var td_accions = $('<td><input type="text" name="pv'+id_tr+'" class="precio" id="pv'+id_tr+'" /></td> <td><input type="text" name="pf'+id_tr+'" class="" id="pf'+id_tr+'" /></td>');
+        //var td_accions = $('');
         var botones = generar_botones(url,id_tr);
         td_accions.append(botones);
         cuerpo_tr.append(td_accions);

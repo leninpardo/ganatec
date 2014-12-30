@@ -36,26 +36,61 @@
                                 </span>
                             </div>
                         </div>
+                         <div class="form-group has-info">
+                            <label for="motivo" class="col-xs-12 col-sm-3 control-label no-padding-right">
+                                Motivo salida
+                            </label>
+                            <div class="col-xs-12 col-sm-8">
+                                <span class="block input-icon input-icon-right">
+                                    
+                                    <select id="tipo" name="tipo">
+                                        
+                                    </select>
+                                    <i class="icon-pencil"></i>
+                                </span>
+                            </div>
+                        </div>
                         <div class="form-group has-info">
                             <label for="animal" class="col-xs-12 col-sm-3 control-label no-padding-right">
                                 Descripcion
                             </label>
                             <div class="col-xs-12 col-sm-8">
                                 <span class="">                                   
-                                    <textarea name="observacion" id="observacion">
+                                    <textarea name="descripcion" id="descripcion">
                                         
                                     </textarea>
                                 </span>
                             </div>
                         </div>
                         <div class="table-responsive1"></div>
-                      
+                        <div>
+                           
+                            <label for="animal" class="col-xs-12 col-sm-3 control-label no-padding-right">
+                                Total en ventas
+                            </label>
+                            <div class="col-xs-12 col-sm-8">
+                                <span class="">                                   
+                                    <input type="text" name="total" id="total"/>
+                                </span>
+                            </div>
+                        </div>
+                         <div>
+                           
+                            <label for="animal" class="col-xs-12 col-sm-3 control-label no-padding-right">
+                                Total peso
+                            </label>
+                            <div class="col-xs-12 col-sm-8">
+                                <span class="">                                   
+                                    <input type="text" name="total_peso" id="total_peso"/>
+                                </span>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
                 <div class="btn-footer">
-                    <button class="btn btn-primary" onclick="validar('bajas')" id="btn-save">
+                    <button class="btn btn-primary" onclick="validar('salidas')" id="btn-save">
                         <i class='icon-ok'></i>
                         Guardar
                     </button>
@@ -73,6 +108,16 @@
     </div>
 </div>
 <script type="text/javascript">
+       $(".precio").keyup(function(){
+       precio=$(this).val();
+       alert(precio);
+       total=$("#total_precio").val();
+       if(total==null){
+           total=0;
+       }
+       t=parseFloat(total)+parseFloat(precio);
+       $("#total").val(t);
+    });
     
     $('.load-footer').hide();
     var url = 'salidas';
@@ -82,13 +127,29 @@
     var accion = ['edit','delete'];
 
     loadTable('GET', url+'/getSalida', url, grid_table, col_names, accion);
-
+ var tipo = $("#tipo");
+    $.ajax({
+        type: 'GET',
+        url: url+'/getTipo',
+        beforeSend: function() {
+            tipo.html(cargando);
+        },
+        success: function(data) {
+            var cadena = '<option value="">Seleccione...</option>';
+            for(var i=0; i<data.length; i++)
+                cadena += '<option value="' + data[i].id + '">' + data[i].tipo_salida + '</option>';
+            tipo.empty().html(cadena);
+        }
+    });
+    $("#fecha_salida").datepicker();
+    
+ 
     var cargar_ganado = function()
     {
         nuevo();
      grid_table = $(".table-responsive1");
      // var col_names = ['Item', 'Descripción', 'Animal', 'Fecha',''];
-     col_names = ['Item', 'nombre ganado', 'peso ingreso', 'costo compra','costo venta'];
+     col_names = ['Item', 'nombre ganado', 'peso ingreso', 'costo compra','precio venta','peso final'];
     accion = [];
     var grid_table = $(".table-responsive1");
         loadTable_check('GET', url+'/getGanado', url, grid_table, col_names, accion);

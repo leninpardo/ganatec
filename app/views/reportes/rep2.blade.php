@@ -8,23 +8,28 @@
 			<table class="table table-bordered table-hover table-striped">
 				<thead>
 					<tr>
-						<th>Descripcion</th>
-						<th>Cantidad</th>
-						<th>Animal</th>
-						<th>Etapa</th>
-						<th>Lote</th>
-						<th>Parcela</th>
+                                            <th>Item</th>
+						<th>Fecha Actividad</th>
+						<th>sub actividad</th>
+						<th>descripcion</th>
+						<th>cantidad</th>
+						<th>precio</th>
+						<th>total</th>
+                                                <th>Tipo</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($prods as $prod)
 					<tr>
+						<td>{{ $prod->id }}</td>
+						<td>{{ $prod->fecha_actividad }}</td>
+						<td>{{ $prod->sub_actividad }}</td>
 						<td>{{ $prod->descripcion }}</td>
 						<td>{{ $prod->cantidad }}</td>
-						<td>{{ $prod->nombre }}</td>
-						<td>{{ $prod->etapa }}</td>
-						<td>{{ $prod->lote }}</td>
-						<td>{{ $prod->parcela }}</td>
+						<td>{{ $prod->precio }}</td>
+                                                <td>{{ $prod->total }}</td>
+                                                <td>{{ $prod->tipo }}</td>
+                                                
 					</tr>
 					@endforeach
 				</tbody>
